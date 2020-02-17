@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>Juego el topo</title>
+        <style type="text/css">
+            body{
+                margin: 0 auto;
+                width: 500px;
+                background-color: lightblue;
+            }
+            h1{
+                color: blue;
+                text-align: center;
+            }
+            h4{
+                color: red;
+            }
+            p{
+                width: 250px;
+                height: 15px;
+                float: left;
+                font-size: 14px;
+                font-weight: bold;
+                color: darkblue;
+            }
+            div{
+                width: 480px;
+                height: 480px;
+                float: left;
+                border: 10px solid black;
+                background-image: url(suelo.jpg);
+            }
+            #tiempoClick{
+                color: green;
+                font-size: 16px;
+            }
+            .claseRecord{
+                color: red;
+                font-size: 18px;
+            }
+            #topo{
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>El Topo</h1>
+        <h4>Haz click en el topo y trata de hacer menos tiempo cada vez.</h4>
+        <p>Te tardaste en darle al topo: <span id="tiempoClick"></span></p>
+        <p>Record: <span id="record" class="claseRecord">10</span><span class="claseRecord">'s</span></p>
+        <div>
+            <img id="topo" src="imgTopo.gif">
+        </div>
+        <script type="text/javascript">
+            var inicioConteo = new Date().getTime();
+            document.getElementById("topo").onclick=function(){
+                document.getElementById("topo").style.display = "none";
+                var finConteo = new Date().getTime();
+                var conteoFinal = (finConteo - inicioConteo)/1000;
+                document.getElementById("tiempoClick").innerHTML = conteoFinal + "'s";
+                setTimeout(aparecerTopo,Math.random()*1500);
+                var recordGuardado = document.getElementById("record").innerHTML;
+                if (recordGuardado > conteoFinal){
+                    document.getElementById("record").innerHTML = conteoFinal;
+                }
+            }
+            function aparecerTopo(){
+                var top = Math.random()*450;
+                var left = Math.random()*450;
+                document.getElementById("topo").style.top = top;
+                document.getElementById("topo").style.left = left;
+                document.getElementById("topo").style.display = "block";
+                inicioConteo = new Date().getTime();
+            }
+        </script>
+    </body>
+</html>
